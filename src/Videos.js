@@ -19,7 +19,7 @@ export default class Videos extends React.Component {
 
     this.calculateVisible = () => {
       const newVisible = {};
-      this.map
+      this.props.map
         .search(this.props.bounds)
         .map(v => v.options.id)
         .forEach(url => {
@@ -35,8 +35,7 @@ export default class Videos extends React.Component {
       if (this.alreadyIndexedIds[id]) {
         return;
       }
-      this.map = leafletElement._map;
-      this.map.indexLayer(leafletElement);
+      this.props.map.indexLayer(leafletElement);
       this.alreadyIndexedIds[id] = true;
       this.calculateVisible();
     };

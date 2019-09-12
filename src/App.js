@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map } from 'react-leaflet';
+import { LeafletConsumer, Map } from 'react-leaflet';
 import L from 'leaflet';
 import Videos from './Videos';
 
@@ -54,7 +54,15 @@ export default class App extends React.Component {
         maxBounds={map_bounds}
         ref={this.onMapLoad}
       >
-        <Videos videoLayout={video_layout} bounds={this.state.bounds} />
+        <LeafletConsumer>
+          {context => (
+            <Videos
+              map={context.map}
+              videoLayout={video_layout}
+              bounds={this.state.bounds}
+            />
+          )}
+        </LeafletConsumer>
       </Map>
     );
   }
